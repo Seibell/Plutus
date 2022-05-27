@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "91007571283",
+    "firebase_url": "https://plutus-8c1ea-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "plutus-8c1ea",
+    "storage_bucket": "plutus-8c1ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91007571283:android:87d3a615cb5ac431ec7da6",
+        "android_client_info": {
+          "package_name": "com.example.plutus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91007571283-1kf0jhi472cendivpvfeokkplbrsgben.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd5TWBrAdlYw6naGBxVIEf03FQd6L1hfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91007571283-1kf0jhi472cendivpvfeokkplbrsgben.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
