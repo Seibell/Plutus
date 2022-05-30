@@ -22,16 +22,19 @@ Users often feel like they are alone in their saving journey, as people don’t 
 
 # Development Plan
 Milestone 1 (30 May):
+
 Basic Login/Registration feature with authentication
 
 Milestone 2 (27 June):
+
 Completed user registration/login feature and integration with backend database
 
 Goal/target setting and dashboard
 
 Basic leaderboard system
 
-Milestone 3 (25 July)
+Milestone 3 (25 July):
+
 Gamification using leaderboards
 
 Easy importing and exporting of income/expenditure data
