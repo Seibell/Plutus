@@ -20,26 +20,50 @@ With our mobile app, users will be able to visualize their expenditure in terms 
 
 Users often feel like they are alone in their saving journey, as people don’t often talk about how much they save/how they save, the introduction of the leaderboards/friends system allows users to observe and even compete with their family/friends.
 
+# Features
+The Mobile App provides a platform for individuals to track their expenditures and incentivises them to save.
+
+Registration and login
+Dashboard - graphs, charts and expenditure reports
+Income and daily expenditure input
+Reminders for users to input income and daily expenditure
+Goal and target setting
+Tips and tricks pop-ups
+Gamification System
+
+
 # Development Plan
-Milestone 1 (30 May):
+Milestone 1 (by 30 May)
+In our milestone 1 submission, we created a base android application using Android Studio (Java) and Google Firebase. We included barebones features such as registration, login, and logout. In the future, we plan to implement other features such as password reset and additional layers of security via 2-factor authentication.
+On the topic of account security, user information that is captured by the firebase console is hashed using a modified version of Scrypt. The console does not have access to user passwords, only the unique ID given to each account when it is created.
+Registration feature: 
+For this feature, we built upon the Firebase Authentication service and overwrote the createUserWithEmailAndPassword method provided, this allows us to create a unique user object with the information provided by the user: such as name and email.
+Login feature: 
+Similarly, this feature was also built with the aid of google firebase, we utilized the signInWithEmailAndPassword method and provided and authenticated users based on their email and password strings match the hashes in the firebase console.
+Logout feature:
+After successfully being authenticated and logging in, users will be prompted by a dashboard. We will plan to add the more unique features of our savings app in this dashboard for future milestones, but currently, it displays the user account's first and last name + email, along with the option to log out
 
-Basic Login/Registration feature with authentication
+Milestone 2 (by 27 June)
+The core set of features should be completed.
+User registration/login feature and integration with a database backend
+Dashboard feature
+Income and expenditure input + reminders
+Goal and target setting
 
-Milestone 2 (27 June):
+Milestone 3 (by 25 July)
+Adding to additional features to improve QOL.
+Gamification of app and rewards
+Tips and tricks for saving
+Add in ways for users to easily import past data (i.e. past transactions)
+Advise users to cut spending in certain areas based on user expenditure data
 
-Completed user registration/login feature and integration with backend database
+# Tech Stack
+Java
+Android Studio
+Firebase (User authentication / Database)
+Figma (App Design)
+Git (Version Control)
 
-Goal/target setting and dashboard
-
-Basic leaderboard system
-
-Milestone 3 (25 July):
-
-Gamification using leaderboards
-
-Easy importing and exporting of income/expenditure data
-
-Recommendation with respect to budget/Tips and tricks to increase savings
 
 # Project Link
 https://www.mediafire.com/file/t2vmlm1gi0ymrju/Plutus.apk/file
