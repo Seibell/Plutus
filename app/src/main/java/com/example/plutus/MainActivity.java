@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     Toolbar toolbar = findViewById(R.id.toolbar); //may have problem with toolbar (not defined maybe earlier part?)
-        toolbar.setTitle("Expense Manager");
+        toolbar.setTitle("Plutus");
         //setSupportActionBar(toolbar);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void displayedSelectedListener(int itemId) {
         Fragment fragment = null;
 
-        switch (itemId) {
+        switch (itemId) { //navigation to be added soontm
             case R.id.dashboard:
                 break;
             case R.id.expense:
