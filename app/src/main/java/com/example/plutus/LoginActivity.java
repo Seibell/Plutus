@@ -47,6 +47,12 @@ public class LoginActivity extends AppCompatActivity {
                 switchToRegister();
             }
         });
+
+        TextView tvSwitchToForgotPassword = findViewById(R.id.tvSwitchToForgotPassword);
+        tvSwitchToForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { switchToForgotPassword(); }
+        });
     }
 
     private void authenticateUser() {
@@ -83,6 +89,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void switchToRegister() {
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void switchToForgotPassword() {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
         finish();
     }
