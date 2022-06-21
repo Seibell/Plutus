@@ -1,86 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvDashboard"
+    <include layout="@layout/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dashboard"
-        android:textSize="80sp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textColor="#1530D6"
-        android:fontFamily="sans-serif-condensed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="50dp"/>
+        android:layout_height="match_parent">
+    </include>
 
-    <TextView
-        android:id="@+id/tvDashboardDescription"
+    <com.google.android.material.navigation.NavigationView
+        app:itemTextAppearance="?android:textAppearanceSmall"
+        app:itemIconTint="@color/buttonColor"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:text="more stuff to be added soon!"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDashboard"/>
-
-    <TextView
-        android:id="@+id/tvFirstName"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="First Name:"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/tvDashboard"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvLastName"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Last Name:"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/tvFirstName"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Email:"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/tvLastName"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/NavView"
+        app:menu="@menu/navmenu"
+        app:headerLayout="@layout/nav_header"
+        android:fitsSystemWindows="true">
+    </com.google.android.material.navigation.NavigationView>
 
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="380dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#D83E9B"
-        android:text="Log out"
-        android:textSize="26dp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
