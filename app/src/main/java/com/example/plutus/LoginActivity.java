@@ -32,7 +32,10 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        Button btnLogin = findViewById(R.id.btnLogin);
+        Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        TextView tvSwitchToRegister = (TextView) findViewById(R.id.tvSwitchToRegister);
+        TextView tvSwitchToForgotPassword = (TextView) findViewById(R.id.tvSwitchToForgotPassword);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView tvSwitchToRegister = findViewById(R.id.tvSwitchToRegister);
         tvSwitchToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView tvSwitchToForgotPassword = findViewById(R.id.tvSwitchToForgotPassword);
         tvSwitchToForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { switchToForgotPassword(); }
