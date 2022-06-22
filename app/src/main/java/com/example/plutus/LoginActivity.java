@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /*
+    Code checks for correct username & password from firebase database and authenticates user
+     */
     private FirebaseAuth mAuth;
 
     @Override

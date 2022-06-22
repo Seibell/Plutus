@@ -20,6 +20,9 @@ import org.w3c.dom.Text;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
+    /*
+    Forgot password menu execute
+     */
     private FirebaseAuth mAuth;
 
     @Override

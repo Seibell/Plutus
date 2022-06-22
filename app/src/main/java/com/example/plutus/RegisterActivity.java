@@ -19,6 +19,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    /*
+    This code is executed when register method is run (from login window)
+     */
+
     private FirebaseAuth mAuth;
 
     @Override

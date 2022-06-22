@@ -27,6 +27,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    /*
+    #This is the main page (you enter this after logging in)
+    #Consists of menu + bottom navigation bar
+    #menu includes logoutUser() method
+    #rest not defined yet (indicated as breaks in switch code)
+    #This is ACTIVITY HOME
+    #Relevant layouts are all drawables (res > drawable-xxhdpi),
+    layouts: appbar, content_main, nav_header and activity_main (res > layout)
+    and both menus (res > menu)
+
+    #You can pre-specify statics (colors/strings/themes) in the res > values file by editing each xml (text file, self-explanatory)
+
+    #When adding new layouts, always remember to edit AndroidManifest.xml to include each scene (if not app will crash)
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-    Toolbar toolbar = findViewById(R.id.toolbar); //may have problem with toolbar (not defined maybe earlier part?)
+        Toolbar toolbar = findViewById(R.id.toolbar); //may have problem with toolbar (not defined maybe earlier part?)
         toolbar.setTitle("Plutus");
         //setSupportActionBar(toolbar);
 
@@ -87,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
             /*
         Button btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
              */
+
     public void displayedSelectedListener(int itemId) {
         Fragment fragment = null;
 
