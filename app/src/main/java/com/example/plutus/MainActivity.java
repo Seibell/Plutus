@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     #You can pre-specify statics (colors/strings/themes) in the res > values file by editing each xml (text file, self-explanatory)
 
-    #When adding new layouts, always remember to edit AndroidManifest.xml to include each scene (if not app will crash)
+    #When adding new layouts, always remember to edit AndroidManifest.xml to include each scene (if not app will crash)!
      */
 
     @Override
