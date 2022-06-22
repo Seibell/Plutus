@@ -14,8 +14,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     #When adding new layouts, always remember to edit AndroidManifest.xml to include each scene (if not app will crash)!
      */
+
+    private BottomNavigationView navigationView;
+    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.NavView);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*
+        Jerome last stopped here because bottomNavigationbar was red
+         */
+
+        navigationView=findViewById(R.id.);
+        frameLayout=findViewById(R.id.main_frame);
 
     }
 
