@@ -9,8 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +46,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     #When adding new layouts, always remember to edit AndroidManifest.xml to include each scene (if not app will crash)!
      */
 
-    private BottomNavigationView navigationView;
+    private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
+
+    //fragment
+    private DashboardFragment dashboardFragment;
+    private ExpenseFragment expenseFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         // Initialize Firebase Auth
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -81,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("Plutus");
         //setSupportActionBar(toolbar);
 
+        bottomNavigationView=findViewById(R.id.BottomNavBar);
+        frameLayout=findViewById(R.id.main_frame);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawerLayout,
@@ -94,13 +103,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.NavView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*
-        Jerome last stopped here because bottomNavigationbar was red
-         */
+        dashboardFragment = new DashboardFragment();
+        expenseFragment = new ExpenseFragment();
+        profileFragment = new ProfileFragment();
 
-        navigationView=findViewById(R.id.BottomNavBar);
-        frameLayout=findViewById(R.id.main_frame);
+        setFragment(dashboardFragment);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+
+                    case R.id.dashboard:
+
+                        setFragment(dashboardFragment);
+                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
+                        return true;
+
+                    case R.id.expense:
+
+                        setFragment(expenseFragment);
+                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
+                        return true;
+
+                    case R.id.profile:
+
+                        setFragment(profileFragment);
+                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
+                        return true;
+
+                    case R.id.logout:
+
+                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
+
+
+    }
+
+    private void setFragment(Fragment fragment) {
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame,fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -114,28 +164,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-            /*
-        Button btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutUser();
-            }
-        });
-             */
-
     public void displayedSelectedListener(int itemId) {
         Fragment fragment = null;
 
         switch (itemId) { //navigation to be added soontm
             case R.id.dashboard:
+                fragment = new DashboardFragment();
                 break;
             case R.id.expense:
+                fragment = new ExpenseFragment();
                 break;
             case R.id.profile:
+                fragment = new ProfileFragment();
                 break;
             case R.id.logout:
                 logoutUser();
+
+
         }
 
         if (fragment != null) {
@@ -160,4 +205,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         displayedSelectedListener(item.getItemId());
         return true;
     }
+
+
 }
