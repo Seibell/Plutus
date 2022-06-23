@@ -3,27 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/drawable-anydpi/dashboard.xml" value="0.159" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/activity_forgot_password.xml" value="0.31431159420289856" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/activity_register.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/appbar_layout.xml" value="0.1911231884057971" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/content_main.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/nav_header.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/menu/bottommenu.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_login.xml" value="0.26266464032421477" />
         <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_register.xml" value="0.2695035460992908" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_forgot_password.xml" value="0.1" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_forgotpassword.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/appbar_layout.xml" value="0.253125" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/content_main.xml" value="0.176" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/nav_header.xml" value="0.18984375" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/menu/bottommenu.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/menu/navmenu.xml" value="0.253125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15885416666666666" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.15885416666666666" />
       </map>
     </option>
   </component>

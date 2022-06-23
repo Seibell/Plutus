@@ -94,11 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.NavView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*
-        Jerome last stopped here because bottomNavigationbar was red
-         */
-
-        navigationView=findViewById(R.id.);
+        navigationView=findViewById(R.id.BottomNavBar);
         frameLayout=findViewById(R.id.main_frame);
 
     }
