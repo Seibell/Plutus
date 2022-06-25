@@ -1,17 +1,26 @@
 package com.example.plutus;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Layout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,11 +88,27 @@ public class DashboardFragment extends Fragment {
 
     private Animation FadeOpen, FadeClose;
 
+    //Firebase
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mIncomeDatabase;
+    private DatabaseReference mExpenseDatabase;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myview = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        //Firebase auth for income and expense
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser mUser = mAuth.getCurrentUser();
+
+        String uid = mUser.getUid();
+
+        mIncomeDatabase = FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
+        mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
 
         //Connect floating button to layout
 
@@ -104,6 +129,9 @@ public class DashboardFragment extends Fragment {
         fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                addData();
+
                 if (isOpen){
                     fab_income_btn.startAnimation(FadeClose);
                     fab_expense_btn.startAnimation(FadeClose);
@@ -130,4 +158,83 @@ public class DashboardFragment extends Fragment {
 
         return myview;
     }
+
+    private void addData(){
+
+        //Fab button income
+
+        fab_income_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                incomeDataInsert();
+            }
+        });
+
+        //Fab button expense
+
+        fab_expense_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+    }
+
+    public void  incomeDataInsert(){
+
+        AlertDialog.Builder mydialog = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+
+        View myviewm = inflater.inflate(R.layout.custom_layout_insertdata, null);
+
+        mydialog.setView(myviewm);
+
+        AlertDialog dialog = mydialog.create();
+
+        EditText editAmount = myviewm.findViewById(R.id.amount_edit);
+        EditText editType = myviewm.findViewById(R.id.type_edit);
+        EditText editRemark = myviewm.findViewById(R.id.remark_edit);
+
+        Button btnSave = myviewm.findViewById(R.id.btnSave);
+        Button btnCancel = myviewm.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String type = editType.getText().toString().trim();
+                String amount = editAmount.getText().toString().trim();
+                String remark = editRemark.getText().toString().trim();
+
+                if (TextUtils.isEmpty(type)) {
+                    editType.setError("Required Field!");
+                    return;
+                }
+                if (TextUtils.isEmpty(amount)) {
+                    editAmount.setError("Required Field!");
+                    return;
+                }
+
+                int amountint = Integer.parseInt(amount);
+
+                if (TextUtils.isEmpty(remark)) {
+                    editRemark.setError("Required Field!");
+                    return;
+                }
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
 }
