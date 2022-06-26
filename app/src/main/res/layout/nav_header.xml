@@ -3,14 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:gravity="center"
-    android:background="@color/buttonColor"
-    android:layout_height="100dp">
+    android:background="@color/purple_500"
+    android:layout_height="150dp"
+    android:fitsSystemWindows="true">
     
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Expense Manager"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/white"
         android:gravity="center">
 

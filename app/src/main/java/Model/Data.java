@@ -3,14 +3,14 @@ package Model;
 public class Data {
 
     private int amount;
-    private String tyoe;
+    private String type;
     private String remark;
     private String id;
     private String date;
 
-    public Data(int amount, String tyoe, String remark, String id, String date) {
+    public Data(int amount, String type, String remark, String id, String date) {
         this.amount = amount;
-        this.tyoe = tyoe;
+        this.type = type;
         this.remark = remark;
         this.id = id;
         this.date = date;
@@ -24,12 +24,12 @@ public class Data {
         this.amount = amount;
     }
 
-    public String getTyoe() {
-        return tyoe;
+    public String getType() {
+        return type;
     }
 
-    public void setTyoe(String tyoe) {
-        this.tyoe = tyoe;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getRemark() {

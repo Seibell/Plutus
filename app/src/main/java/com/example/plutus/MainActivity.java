@@ -117,24 +117,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.dashboard:
 
                         setFragment(dashboardFragment);
-                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
                         return true;
 
                     case R.id.expense:
 
                         setFragment(expenseFragment);
-                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
                         return true;
 
                     case R.id.profile:
 
                         setFragment(profileFragment);
-                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
                         return true;
 
                     case R.id.logout:
 
-                        bottomNavigationView.setItemBackgroundResource(R.color.buttonColor);
                         return true;
 
                     default:

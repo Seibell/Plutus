@@ -16,7 +16,7 @@
 
     <com.google.android.material.navigation.NavigationView
         app:itemTextAppearance="?android:textAppearanceSmall"
-        app:itemIconTint="@color/buttonColor"
+        app:itemIconTint="@color/purple_700"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
