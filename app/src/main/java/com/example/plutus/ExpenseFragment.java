@@ -1,5 +1,6 @@
 package com.example.plutus;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -35,6 +38,19 @@ public class ExpenseFragment extends Fragment {
     private FirebaseRecyclerAdapter adapter;
 
     private TextView expenseSumResult;
+
+    private TextView incomeSumResult;
+
+    //Update expense/income items
+
+    private EditText editAmount;
+    private EditText editType;
+    private EditText editRemark;
+
+    //Button to Update and Delete
+
+    private Button btnUpdate;
+    private Button btnDelete;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -145,5 +161,20 @@ public class ExpenseFragment extends Fragment {
                 mAmount.setText(strAmount);
             }
         }
+
+    private void updateData(){
+
+        AlertDialog.Builder mydialog = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+
+        View myview = inflater.inflate(R.layout.update_data_item, null);
+
+        mydialog.setView(myview);
+
+        editAmount = myview.findViewById(R.id.amount_edt);
+        editType = myview.findViewById(R.id.type_edt);
+        editRemark = myview.findViewById(R.id.note_edt);
+
+    }
 
 }

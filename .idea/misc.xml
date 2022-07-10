@@ -9,24 +9,17 @@
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/activity_register.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/appbar_layout.xml" value="0.1911231884057971" />
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/content_main.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/fragment_dashboard.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/custom_layout_insertdata.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/expense_recycler_data.xml" value="0.15519452757588714" />
+        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/fragment_dashboard.xml" value="0.21504916631038906" />
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/fragment_expense.xml" value="0.1" />
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/nav_header.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/layout/update_data_item.xml" value="0.1" />
         <entry key="..\:/Users/Admin/StudioProjects/Plutus/app/src/main/res/menu/bottommenu.xml" value="0.17135416666666667" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_forgot_password.xml" value="0.41530797101449274" />
         <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_login.xml" value="0.26266464032421477" />
         <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_register.xml" value="0.2695035460992908" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/appbar_layout.xml" value="0.41530797101449274" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/content_main.xml" value="0.2695035460992908" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/custom_layout_insertdata.xml" value="0.5" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/expense_recycler_data.xml" value="0.31354166666666666" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_dashboard.xml" value="0.2695035460992908" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_expense.xml" value="0.31354166666666666" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_income.xml" value="0.3125" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_profile.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/ryanl/AndroidStudioProjects/Plutus/app/src/main/res/layout/nav_header.xml" value="0.41530797101449274" />
         <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_forgot_password.xml" value="0.1" />
         <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_forgotpassword.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ryanl/StudioProjects/Plutus/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
