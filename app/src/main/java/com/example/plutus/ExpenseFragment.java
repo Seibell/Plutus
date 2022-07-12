@@ -124,6 +124,13 @@ public class ExpenseFragment extends Fragment {
                 holder.setType(model.getType());
                 holder.setNote(model.getRemark());
                 holder.setDate(model.getDate());
+
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateData();
+                    }
+                });
             }
         };
         recyclerView.setAdapter(adapter);
@@ -175,6 +182,26 @@ public class ExpenseFragment extends Fragment {
         editType = myview.findViewById(R.id.type_edt);
         editRemark = myview.findViewById(R.id.note_edt);
 
+        btnUpdate = myview.findViewById(R.id.btnUpdate);
+        btnDelete = myview.findViewById(R.id.btnDelete);
+
+        AlertDialog dialog = mydialog.create();
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
 }
