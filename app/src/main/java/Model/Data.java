@@ -2,13 +2,13 @@ package Model;
 
 public class Data {
 
-    private int amount;
+    private double amount;
     private String type;
     private String remark;
     private String id;
     private String date;
 
-    public Data(int amount, String type, String remark, String id, String date) {
+    public Data(double amount, String type, String remark, String id, String date) {
         this.amount = amount;
         this.type = type;
         this.remark = remark;
@@ -16,11 +16,11 @@ public class Data {
         this.date = date;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

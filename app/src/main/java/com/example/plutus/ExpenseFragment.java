@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import Model.Data;
@@ -52,7 +53,7 @@ public class ExpenseFragment extends Fragment {
     private Button btnRemove;
 
     //Data items
-    private int amount; //Change to double later?
+    private double amount; //Change to double later?
     private String type;
     private String note;
 
@@ -83,13 +84,12 @@ public class ExpenseFragment extends Fragment {
 
         layoutManager.setReverseLayout(true); // this makes the recycler go from top>bottom
         layoutManager.setStackFromEnd(true);
-        layoutManager.setStackFromEnd(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
 
-            int sum = 0;
+            double sum = 0.00;
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -186,7 +186,7 @@ public class ExpenseFragment extends Fragment {
                 String amountString = edtAmount.getText().toString().trim();
                 type = edtType.getText().toString().trim();
                 note = edtNote.getText().toString().trim();
-                amount = Integer.parseInt(amountString);
+                amount = Double.parseDouble(amountString);
 
                 String mDate = DateFormat.getDateInstance().format(new Date());
                 Data data = new Data(amount, type, note, pos_key, mDate);
@@ -232,7 +232,7 @@ public class ExpenseFragment extends Fragment {
                 mNote.setText(note);
             }
 
-            private void setAmount(int amount) {
+            private void setAmount(double amount) {
                 TextView mAmount = mView.findViewById(R.id.amount_txt_expense);
 
                 String strAmount = String.valueOf(amount);

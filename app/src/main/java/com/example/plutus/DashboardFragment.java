@@ -1,11 +1,15 @@
 package com.example.plutus;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputType;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +22,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import Model.Data;
@@ -56,6 +63,10 @@ public class DashboardFragment extends Fragment {
     //Total dashboard expense view
     private TextView totalExpenseResult;
 
+    //Recycler
+    private RecyclerView recyclerView;
+    private FirebaseRecyclerAdapter adapter;
+
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -69,7 +80,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View myview = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         //Firebase auth for income and expense
         mAuth = FirebaseAuth.getInstance();
@@ -82,20 +93,23 @@ public class DashboardFragment extends Fragment {
 
         //Connect floating button to layout
 
-        fab_main_btn = myview.findViewById(R.id.fb_main_plus_btn);
-        fab_expense_btn = myview.findViewById(R.id.expense_Ft_btn);
+        fab_main_btn = view.findViewById(R.id.fb_main_plus_btn);
+        fab_expense_btn = view.findViewById(R.id.expense_Ft_btn);
 
         //Connect floating text
 
-        fab_expense_txt = myview.findViewById(R.id.expense_ft_text);
+        fab_expense_txt = view.findViewById(R.id.expense_ft_text);
 
         //Animation connect
 
         FadeOpen = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_open);
         FadeClose = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_close);
 
+        //Recycler
+        recyclerView = view.findViewById(R.id.recycler_expense);
+
         //Total expense
-        totalExpenseResult = myview.findViewById(R.id.expense_set_result);
+        totalExpenseResult = view.findViewById(R.id.expense_set_result);
 
         fab_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +138,8 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                int expenseSum = 0;
+                DecimalFormat df = new DecimalFormat("0.00");
+                double expenseSum = 0.00;
 
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
@@ -141,7 +156,14 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        return myview;
+        //Recycler View
+        LinearLayoutManager layoutManagerExpense = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManagerExpense.setStackFromEnd(true);
+        layoutManagerExpense.setReverseLayout(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManagerExpense);
+
+        return view;
     }
 
     //Floating button animation :D
@@ -182,6 +204,7 @@ public class DashboardFragment extends Fragment {
 
         dialog.setCancelable(false);
         final EditText edtAmount = view.findViewById(R.id.amount_edt);
+        edtAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
         final EditText edtType = view.findViewById(R.id.type_edt);
         final EditText edtNote = view.findViewById(R.id.note_edt);
 
@@ -205,7 +228,7 @@ public class DashboardFragment extends Fragment {
                     return;
                 }
 
-                int intAmount = Integer.parseInt(amount);
+                double doubleAmount = Double.parseDouble(amount);
 
                 if (TextUtils.isEmpty(note)) {
                     edtNote.setError("Required Field!");
@@ -215,7 +238,7 @@ public class DashboardFragment extends Fragment {
                 String id = mExpenseDatabase.push().getKey();
                 String mDate = DateFormat.getDateInstance().format(new Date());
 
-                Data data = new Data(intAmount, type, note, id, mDate);
+                Data data = new Data(doubleAmount, type, note, id, mDate);
 
                 mExpenseDatabase.child(id).setValue(data);
 
@@ -236,4 +259,53 @@ public class DashboardFragment extends Fragment {
         dialog.show();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>().setQuery(mExpenseDatabase, Data.class).build();
+
+        adapter = new FirebaseRecyclerAdapter<Data, ExpenseViewHolder>(options) {
+
+            public ExpenseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return new ExpenseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_expense, parent, false));
+            }
+
+            protected void onBindViewHolder(@NonNull ExpenseViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Data model) {
+                holder.setExpenseAmount(model.getAmount());
+                holder.setExpenseType(model.getType());
+                holder.setExpenseDate(model.getDate());
+            }
+        };
+
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+    }
+
+    //Dashboard expense recyclerview
+    public static class ExpenseViewHolder extends RecyclerView.ViewHolder {
+
+        View mExpenseView;
+
+        public ExpenseViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mExpenseView = itemView;
+        }
+
+        public void setExpenseAmount(double amount) {
+            TextView mAmount = mExpenseView.findViewById(R.id.amount_expense_ds);
+            String stringAmount = String.valueOf(amount);
+            mAmount.setText(stringAmount);
+        }
+
+        public void setExpenseType(String type) {
+            TextView mType = mExpenseView.findViewById(R.id.type_expense_ds);
+            mType.setText(type);
+        }
+
+        public void setExpenseDate(String date) {
+            TextView mDate = mExpenseView.findViewById(R.id.date_expense_ds);
+            mDate.setText(date);
+        }
+    }
 }
