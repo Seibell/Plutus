@@ -1,5 +1,7 @@
 package com.example.plutus;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -21,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 import Model.Data;
 
@@ -35,6 +42,21 @@ public class ExpenseFragment extends Fragment {
     private FirebaseRecyclerAdapter adapter;
 
     private TextView expenseSumResult;
+
+    //For updating expense data
+    private EditText edtAmount;
+    private EditText edtType;
+    private EditText edtNote;
+
+    private Button btnUpdate;
+    private Button btnRemove;
+
+    //Data items
+    private int amount; //Change to double later?
+    private String type;
+    private String note;
+
+    private String pos_key;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +89,7 @@ public class ExpenseFragment extends Fragment {
 
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
 
-            double sum = 0.0;
+            int sum = 0;
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -103,15 +125,87 @@ public class ExpenseFragment extends Fragment {
                 return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.expense_recycler_data, parent, false));
             }
 
-            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Data model) {
+            protected void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Data model) {
                 holder.setAmount(model.getAmount());
                 holder.setType(model.getType());
                 holder.setNote(model.getRemark());
                 holder.setDate(model.getDate());
+
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        pos_key = getRef(position).getKey();
+
+                        amount = model.getAmount();
+                        type = model.getType();
+                        note = model.getRemark();
+
+                        updateDataItem();
+                    }
+                });
             }
         };
+
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    private void updateDataItem() {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View view = inflater.inflate(R.layout.update_data_item, null);
+
+        dialog.setView(view);
+
+        edtAmount = view.findViewById(R.id.amount_edt);
+        edtType = view.findViewById(R.id.type_edt);
+        edtNote = view.findViewById(R.id.note_edt);
+
+        //shows editText data in updateDialog
+        edtAmount.setText(String.valueOf(amount));
+        edtAmount.setSelection(String.valueOf(amount).length());
+
+        edtType.setText(type);
+        edtType.setSelection(type.length());
+
+        edtNote.setText(note);
+        edtNote.setSelection(note.length());
+
+        //Buttons
+        btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnRemove = view.findViewById(R.id.btnRemove);
+
+        AlertDialog updateDialog = dialog.create();
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String amountString = edtAmount.getText().toString().trim();
+                type = edtType.getText().toString().trim();
+                note = edtNote.getText().toString().trim();
+                amount = Integer.parseInt(amountString);
+
+                String mDate = DateFormat.getDateInstance().format(new Date());
+                Data data = new Data(amount, type, note, pos_key, mDate);
+
+                mExpenseDatabase.child(pos_key).setValue(data);
+
+                updateDialog.dismiss();
+            }
+        });
+
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExpenseDatabase.child(pos_key).removeValue();
+                updateDialog.dismiss();
+            }
+        });
+
+        updateDialog.show();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
