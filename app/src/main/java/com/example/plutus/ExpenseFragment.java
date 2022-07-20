@@ -94,13 +94,13 @@ public class ExpenseFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                DecimalFormat df = new DecimalFormat("0.00");
+
                 for (DataSnapshot s : snapshot.getChildren()) {
                     Data data = s.getValue(Data.class);
                     sum += data.getAmount();
 
-                    String finalSum = String.valueOf(sum);
-
-                    expenseSumResult.setText(finalSum);
+                    expenseSumResult.setText(df.format(sum));
                 }
             }
 
