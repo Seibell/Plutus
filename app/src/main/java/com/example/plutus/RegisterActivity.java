@@ -58,11 +58,15 @@ public class RegisterActivity extends AppCompatActivity {
         EditText etFirstName = findViewById(R.id.etFirstName);
         EditText etLastName = findViewById(R.id.etLastName);
         EditText etRegisterEmail = findViewById(R.id.etRegisterEmail);
+        EditText etIncome = findViewById(R.id.etIncome);
+        EditText etSavingsGoal = findViewById(R.id.etSavingsGoal);
         EditText etRegisterPassword = findViewById(R.id.etRegisterPassword);
 
         String firstName = etFirstName.getText().toString();
         String lastName = etLastName.getText().toString();
         String email = etRegisterEmail.getText().toString();
+        double income = Double.parseDouble(etIncome.getText().toString());
+        double savingsGoal = Double.parseDouble(etSavingsGoal.getText().toString());
         String password = etRegisterPassword.getText().toString();
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -75,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            User user = new User(firstName, lastName, email, 0.00);
+                            User user = new User(firstName, lastName, email, income, savingsGoal);
                             FirebaseDatabase.getInstance().getReference("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

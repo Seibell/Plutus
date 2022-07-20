@@ -59,9 +59,11 @@ public class DashboardFragment extends Fragment {
     //Firebase
     private FirebaseAuth mAuth;
     private DatabaseReference mExpenseDatabase;
+    private DatabaseReference mProfileDatabase;
 
-    //Total dashboard expense view
+    //Total dashboard expense/savings view
     private TextView totalExpenseResult;
+    private TextView totalSavingsResult;
 
     //Recycler
     private RecyclerView recyclerView;
@@ -91,6 +93,9 @@ public class DashboardFragment extends Fragment {
 
         mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
 
+        //savings database (linked to user)
+        mProfileDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+
         //Connect floating button to layout
 
         fab_main_btn = view.findViewById(R.id.fb_main_plus_btn);
@@ -110,6 +115,9 @@ public class DashboardFragment extends Fragment {
 
         //Total expense
         totalExpenseResult = view.findViewById(R.id.expense_set_result);
+
+        //Total savings
+        totalSavingsResult = view.findViewById(R.id.savings_set_result);
 
         fab_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,16 +146,36 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                DecimalFormat df = new DecimalFormat("0.00");
                 double expenseSum = 0.00;
+                DecimalFormat df = new DecimalFormat("0.00");
 
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     expenseSum += data.getAmount();
 
-                    String result = String.valueOf(expenseSum);
-                    totalExpenseResult.setText(result);
+                    totalExpenseResult.setText(df.format(expenseSum));
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Compute savings
+        mProfileDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                User user = snapshot.getValue(User.class);
+
+                double savingsFinal = user.income - Double.parseDouble(totalExpenseResult.getText().toString());
+
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                totalSavingsResult.setText(df.format(savingsFinal));
+
             }
 
             @Override
