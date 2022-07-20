@@ -232,7 +232,6 @@ public class DashboardFragment extends Fragment {
 
         dialog.setCancelable(false);
         final EditText edtAmount = view.findViewById(R.id.amount_edt);
-        edtAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
         final EditText edtType = view.findViewById(R.id.type_edt);
         final EditText edtNote = view.findViewById(R.id.note_edt);
 
