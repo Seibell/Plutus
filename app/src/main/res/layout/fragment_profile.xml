@@ -6,8 +6,6 @@
     android:orientation="vertical"
     tools:context=".ProfileFragment">
 
-    <include layout="@layout/toolbar_profile"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Random User"
+            android:id="@+id/profileWelcome"
             android:textColor="@color/purple_500"
             android:textSize="20dp"
             android:layout_marginTop="8dp"
@@ -64,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Random"
+            android:id="@+id/profileFirstName"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
@@ -105,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User"
+            android:id="@+id/profileLastName"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
@@ -146,11 +147,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="random_user@gmail.com"
+            android:id="@+id/profileEmail"
             android:layout_marginLeft="70dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="Edit Profile"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|center_horizontal" />
 
     <View
         android:layout_width="match_parent"
