@@ -201,6 +201,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         displayedSelectedListener(item.getItemId());
         return true;
     }
-
-
 }

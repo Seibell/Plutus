@@ -22,5 +22,14 @@
         <item name="color">@android:color/white</item>
     </style>
 
+    <style name="Theme.Plutus.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Plutus.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Plutus.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>
