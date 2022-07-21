@@ -52,7 +52,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="First Name"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -95,7 +95,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="Last Name"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -148,7 +148,7 @@
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="random_user@gmail.com"
             android:inputType="textEmailAddress"
             android:id="@+id/editProfileEmail"
@@ -190,14 +190,15 @@
             android:layout_marginLeft="5dp"/>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="69"
             android:id="@+id/editProfileIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="70dp"
             android:inputType="numberDecimal"
+            android:text="69"
+            android:textColor="@color/black"
             android:textSize="18dp"
-            android:textColor="@color/black"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -234,7 +235,7 @@
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="69"
             android:id="@+id/editProfileSavingsGoal"
             android:inputType="numberDecimal"
