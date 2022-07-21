@@ -131,54 +131,286 @@
                     android:layout_width="match_parent"
                     android:id="@+id/recycler_expense"
                     android:layout_height="150dp">
-
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!--Pie chart to display the data-->
+
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="75dp"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:padding="6dp" />
+
+
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_below="@+id/cardViewGraph"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    android:id="@+id/details">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="268dp"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="15dp"
+                            android:text="Spending breakdown (%):"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <!--View to display the line-->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/black" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="10dp">
+
+                            <!--Text view to display R -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Housing"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvHousing"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif-light"
+                                android:text="0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <!--View to display the line-->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/black" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Medical"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvMedical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif-light"
+                                android:text="0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/black" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Food"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvFood"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif-light"
+                                android:text="0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/black" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Entertainment"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvEntertainment"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif-light"
+                                android:text="0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/black" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Utilities"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvUtilities"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif-light"
+                                android:text="0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/black" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Others"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvOthers"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif-light"
+                                android:text="0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
-
         </ScrollView>
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Expense"
-                android:id="@+id/expense_ft_text"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:background="@color/purple_500"
-                android:layout_gravity="center"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="40dp"
-                android:visibility="invisible"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/expense_Ft_btn"
-                android:layout_gravity="bottom|right"
-                android:layout_marginBottom="80dp"
-                android:visibility="invisible"
-                android:src="@drawable/expense"
-                />
-        </LinearLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fb_main_plus_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#6A1B9A"
-            android:src="@drawable/expense"
-            app:fabSize="normal" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
+

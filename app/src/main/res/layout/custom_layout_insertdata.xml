@@ -36,9 +36,9 @@
 
                     <EditText
                         android:id="@+id/amount_edt"
-                        android:inputType="numberDecimal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -64,11 +64,11 @@
                     android:layout_weight="2"
                     android:layout_margin="10dp"
                     android:layout_height="wrap_content">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+
+                    <Spinner
                         android:id="@+id/type_edt"
-                        />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                 </RelativeLayout>
             </LinearLayout>

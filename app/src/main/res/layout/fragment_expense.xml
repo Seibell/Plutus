@@ -53,12 +53,58 @@
 
         </LinearLayout>
 
+
+
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/recycler_id_expense"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="404dp">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Expense"
+            android:id="@+id/expense_ft_text"
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:background="@color/purple_500"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expense_Ft_btn"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:visibility="invisible"
+            android:src="@drawable/expense"
+            />
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_main_plus_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#6A1B9A"
+        android:src="@drawable/expense"
+        app:fabSize="normal" />
+
+
 </LinearLayout>

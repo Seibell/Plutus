@@ -9,15 +9,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,8 +53,8 @@ public class ExpenseFragment extends Fragment {
 
     //For updating expense data
     private EditText edtAmount;
-    private EditText edtType;
     private EditText edtNote;
+    private Spinner edtType;
 
     private Button btnUpdate;
     private Button btnRemove;
@@ -58,6 +65,19 @@ public class ExpenseFragment extends Fragment {
     private String note;
 
     private String pos_key;
+
+    //Floating button
+    private FloatingActionButton fab_main_btn;
+    private FloatingActionButton fab_expense_btn;
+
+    //FLoating button text
+    private TextView fab_expense_txt;
+
+    //Add boolean
+    private boolean isOpen = false;
+
+    //Animation class
+    private Animation FadeOpen, FadeClose;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +96,20 @@ public class ExpenseFragment extends Fragment {
         FirebaseUser mUser = mAuth.getCurrentUser();
         String uid = mUser.getUid();
 
+        //Connect floating button to layout
+
+        fab_main_btn = view.findViewById(R.id.fb_main_plus_btn);
+        fab_expense_btn = view.findViewById(R.id.expense_Ft_btn);
+
+        //Connect floating text
+
+        fab_expense_txt = view.findViewById(R.id.expense_ft_text);
+
+        //Animation connect
+
+        FadeOpen = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_open);
+        FadeClose = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_close);
+
         mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
         expenseSumResult = view.findViewById(R.id.expense_txt_result);
         recyclerView = view.findViewById(R.id.recycler_id_expense);
@@ -86,6 +120,28 @@ public class ExpenseFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+
+        fab_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addData();
+                if (isOpen) {
+                    fab_expense_btn.startAnimation(FadeClose);
+                    fab_expense_btn.setClickable(false);
+
+                    fab_expense_txt.startAnimation(FadeClose);
+                    fab_expense_txt.setClickable(false);
+                    isOpen = false;
+                } else {
+                    fab_expense_btn.startAnimation(FadeOpen);
+                    fab_expense_btn.setClickable(true);
+
+                    fab_expense_txt.startAnimation(FadeOpen);
+                    fab_expense_txt.setClickable(true);
+                    isOpen = true;
+                }
+            }
+        });
 
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
 
@@ -159,19 +215,23 @@ public class ExpenseFragment extends Fragment {
 
         dialog.setView(view);
 
-        edtAmount = view.findViewById(R.id.amount_edt);
         edtType = view.findViewById(R.id.type_edt);
+        String[] types = getResources().getStringArray(R.array.types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        edtType.setAdapter(adapter);
+
+        edtAmount = view.findViewById(R.id.amount_edt);
         edtNote = view.findViewById(R.id.note_edt);
 
         //shows editText data in updateDialog
         edtAmount.setText(String.valueOf(amount));
         edtAmount.setSelection(String.valueOf(amount).length());
 
-        edtType.setText(type);
-        edtType.setSelection(type.length());
-
         edtNote.setText(note);
         edtNote.setSelection(note.length());
+
+        edtType.setSelection(adapter.getPosition(type.toString()));
 
         //Buttons
         btnUpdate = view.findViewById(R.id.btnUpdate);
@@ -184,7 +244,7 @@ public class ExpenseFragment extends Fragment {
             public void onClick(View v) {
 
                 String amountString = edtAmount.getText().toString().trim();
-                type = edtType.getText().toString().trim();
+                type = edtType.getSelectedItem().toString();
                 note = edtNote.getText().toString().trim();
                 amount = Double.parseDouble(amountString);
 
@@ -240,4 +300,95 @@ public class ExpenseFragment extends Fragment {
             }
         }
 
+    //Floating button animation :D
+    private void ftAnimation(){
+        if (isOpen) {
+            fab_expense_btn.startAnimation(FadeClose);
+            fab_expense_btn.setClickable(false);
+
+            fab_expense_txt.startAnimation(FadeClose);
+            fab_expense_txt.setClickable(false);
+            isOpen = false;
+        } else {
+            fab_expense_btn.startAnimation(FadeOpen);
+            fab_expense_btn.setClickable(true);
+
+            fab_expense_txt.startAnimation(FadeOpen);
+            fab_expense_txt.setClickable(true);
+            isOpen = true;
+        }
+    }
+
+    private void addData() {
+        fab_expense_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expenseDataInsert();
+            }
+        });
+    }
+
+
+    public void expenseDataInsert() {
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View view = inflater.inflate(R.layout.custom_layout_insertdata, null);
+        myDialog.setView(view);
+        final AlertDialog dialog = myDialog.create();
+
+        dialog.setCancelable(false);
+        final EditText edtAmount = view.findViewById(R.id.amount_edt);
+        final EditText edtNote = view.findViewById(R.id.note_edt);
+
+        final Spinner spinnerTypes = view.findViewById(R.id.type_edt);
+        String[] types = getResources().getStringArray(R.array.types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTypes.setAdapter(adapter);
+
+        Button btnSave = view.findViewById(R.id.btnSave);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String amount = edtAmount.getText().toString().trim();
+                String note = edtNote.getText().toString().trim();
+                String type = spinnerTypes.getSelectedItem().toString();
+
+                if (TextUtils.isEmpty(amount)) {
+                    edtAmount.setError("Required Field!");
+                    return;
+                }
+
+                double doubleAmount = Double.parseDouble(amount);
+
+                if (TextUtils.isEmpty(note)) {
+                    edtNote.setError("Required Field!");
+                    return;
+                }
+
+                String id = mExpenseDatabase.push().getKey();
+                String mDate = DateFormat.getDateInstance().format(new Date());
+
+                Data data = new Data(doubleAmount, type, note, id, mDate);
+
+                mExpenseDatabase.child(id).setValue(data);
+
+                Toast.makeText(getActivity(), "Expenses have been added!", Toast.LENGTH_SHORT).show();
+
+                ftAnimation();
+                dialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ftAnimation();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 }

@@ -1,13 +1,16 @@
 package com.example.plutus;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +27,8 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference mProfileDatabase;
 
     private TextView profileFirstName, profileLastName, profileEmail, profileWelcome;
+
+    private Button btnEditProfile;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -52,6 +57,15 @@ public class ProfileFragment extends Fragment {
         profileLastName = view.findViewById(R.id.profileLastName);
         profileEmail = view.findViewById(R.id.profileEmail);
 
+        btnEditProfile = view.findViewById(R.id.btnEditProfile);
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToEditProfile();
+            }
+        });
+
         mProfileDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,5 +87,10 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void switchToEditProfile() {
+        Intent intent = new Intent(getActivity(), EditProfileFragment.class);
+        startActivity(intent);
     }
 }

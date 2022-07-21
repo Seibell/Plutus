@@ -65,7 +65,7 @@
                     android:layout_margin="10dp"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/type_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />

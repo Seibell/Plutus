@@ -2,6 +2,7 @@ package com.example.plutus;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,28 +36,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import Model.Data;
 
 public class DashboardFragment extends Fragment {
-
-    //Floating button
-    private FloatingActionButton fab_main_btn;
-    private FloatingActionButton fab_expense_btn;
-
-    //FLoating button text
-    private TextView fab_expense_txt;
-
-    //Add boolean
-    private boolean isOpen = false;
-
-    //Animation class
-    private Animation FadeOpen, FadeClose;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -65,9 +59,14 @@ public class DashboardFragment extends Fragment {
     private TextView totalExpenseResult;
     private TextView totalSavingsResult;
 
+    //Textviews for pie chart
+    private TextView tvHousing, tvMedical, tvFood, tvEntertainment, tvUtilities, tvOthers;
+    PieChart pieChart;
+
     //Recycler
     private RecyclerView recyclerView;
     private FirebaseRecyclerAdapter adapter;
+
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -96,20 +95,6 @@ public class DashboardFragment extends Fragment {
         //savings database (linked to user)
         mProfileDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
-        //Connect floating button to layout
-
-        fab_main_btn = view.findViewById(R.id.fb_main_plus_btn);
-        fab_expense_btn = view.findViewById(R.id.expense_Ft_btn);
-
-        //Connect floating text
-
-        fab_expense_txt = view.findViewById(R.id.expense_ft_text);
-
-        //Animation connect
-
-        FadeOpen = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_open);
-        FadeClose = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_close);
-
         //Recycler
         recyclerView = view.findViewById(R.id.recycler_expense);
 
@@ -119,27 +104,16 @@ public class DashboardFragment extends Fragment {
         //Total savings
         totalSavingsResult = view.findViewById(R.id.savings_set_result);
 
-        fab_main_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addData();
-                if (isOpen) {
-                    fab_expense_btn.startAnimation(FadeClose);
-                    fab_expense_btn.setClickable(false);
+        //Textviews for graph
+        tvHousing = view.findViewById(R.id.tvHousing);
+        tvMedical = view.findViewById(R.id.tvMedical);
+        tvFood = view.findViewById(R.id.tvFood);
+        tvEntertainment = view.findViewById(R.id.tvEntertainment);
+        tvUtilities = view.findViewById(R.id.tvUtilities);
+        tvOthers = view.findViewById(R.id.tvOthers);
+        pieChart = view.findViewById(R.id.pieChart);
 
-                    fab_expense_txt.startAnimation(FadeClose);
-                    fab_expense_txt.setClickable(false);
-                    isOpen = false;
-                } else {
-                    fab_expense_btn.startAnimation(FadeOpen);
-                    fab_expense_btn.setClickable(true);
-
-                    fab_expense_txt.startAnimation(FadeOpen);
-                    fab_expense_txt.setClickable(true);
-                    isOpen = true;
-                }
-            }
-        });
+        getData();
 
         //Calculate total expense
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
@@ -194,97 +168,7 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
-    //Floating button animation :D
-    private void ftAnimation(){
-        if (isOpen) {
-            fab_expense_btn.startAnimation(FadeClose);
-            fab_expense_btn.setClickable(false);
 
-            fab_expense_txt.startAnimation(FadeClose);
-            fab_expense_txt.setClickable(false);
-            isOpen = false;
-        } else {
-            fab_expense_btn.startAnimation(FadeOpen);
-            fab_expense_btn.setClickable(true);
-
-            fab_expense_txt.startAnimation(FadeOpen);
-            fab_expense_txt.setClickable(true);
-            isOpen = true;
-        }
-    }
-
-    private void addData() {
-        fab_expense_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expenseDataInsert();
-            }
-        });
-    }
-
-
-    public void expenseDataInsert() {
-        AlertDialog.Builder myDialog = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        View view = inflater.inflate(R.layout.custom_layout_insertdata, null);
-        myDialog.setView(view);
-        final AlertDialog dialog = myDialog.create();
-
-        dialog.setCancelable(false);
-        final EditText edtAmount = view.findViewById(R.id.amount_edt);
-        final EditText edtType = view.findViewById(R.id.type_edt);
-        final EditText edtNote = view.findViewById(R.id.note_edt);
-
-        Button btnSave = view.findViewById(R.id.btnSave);
-        Button btnCancel = view.findViewById(R.id.btnCancel);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String type = edtType.getText().toString().trim();
-                String amount = edtAmount.getText().toString().trim();
-                String note = edtNote.getText().toString().trim();
-
-                if (TextUtils.isEmpty(type)) {
-                    edtType.setError("Required Field!");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(amount)) {
-                    edtAmount.setError("Required Field!");
-                    return;
-                }
-
-                double doubleAmount = Double.parseDouble(amount);
-
-                if (TextUtils.isEmpty(note)) {
-                    edtNote.setError("Required Field!");
-                    return;
-                }
-
-                String id = mExpenseDatabase.push().getKey();
-                String mDate = DateFormat.getDateInstance().format(new Date());
-
-                Data data = new Data(doubleAmount, type, note, id, mDate);
-
-                mExpenseDatabase.child(id).setValue(data);
-
-                Toast.makeText(getActivity(), "Expenses have been added!", Toast.LENGTH_SHORT).show();
-
-                ftAnimation();
-                dialog.dismiss();
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ftAnimation();
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
 
     @Override
     public void onStart() {
@@ -334,5 +218,94 @@ public class DashboardFragment extends Fragment {
             TextView mDate = mExpenseView.findViewById(R.id.date_expense_ds);
             mDate.setText(date);
         }
+    }
+
+    private void getData() {
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid = mUser.getUid();
+
+        mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
+
+        mExpenseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<PieModel> pieModels = new ArrayList<>();
+                double totalExpenseSum = 0.00;
+
+                for (DataSnapshot s : snapshot.getChildren()) {
+                    Data data = s.getValue(Data.class);
+                    totalExpenseSum += data.getAmount();
+                }
+
+                for (DataSnapshot s : snapshot.getChildren()) {
+                    Data data = s.getValue(Data.class);
+
+                    Random random = new Random();
+
+                    pieModels.add(new PieModel(data.getType(), (float) data.getAmount(), Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
+                }
+
+                for (int i = 0; i < pieModels.size(); i++) {
+                    pieChart.addPieSlice(pieModels.get(i));
+                }
+
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                double housing = 0.0;
+                double medical = 0.0;
+                double food = 0.0;
+                double entertainment = 0.0;
+                double utilities = 0.0;
+                double others = 0.0;
+
+                for (DataSnapshot s : snapshot.getChildren()) {
+                    Data data = s.getValue(Data.class);
+
+                    if (data.getType().equalsIgnoreCase("housing")) {
+                        housing += data.getAmount();
+                    }
+                    if (data.getType().equalsIgnoreCase("medical")) {
+                        medical += data.getAmount();
+                    }
+                    if (data.getType().equalsIgnoreCase("food")) {
+                        food += data.getAmount();
+                    }
+                    if (data.getType().equalsIgnoreCase("entertainment")) {
+                        entertainment += data.getAmount();
+                    }
+                    if (data.getType().equalsIgnoreCase("utilities")) {
+                        utilities += data.getAmount();
+                    }
+                    if (data.getType().equalsIgnoreCase("others")) {
+                        others += data.getAmount();
+                    }
+                }
+
+                double finalHousingResult = (housing / totalExpenseSum) * 100;
+                tvHousing.setText(String.valueOf(df.format(finalHousingResult)));
+
+                double finalMedicalResult = (medical / totalExpenseSum) * 100;
+                tvMedical.setText(String.valueOf(df.format(finalMedicalResult)));
+
+                double finalFoodResult = (food / totalExpenseSum) * 100;
+                tvFood.setText(String.valueOf(df.format(finalFoodResult)));
+
+                double finalEntertainmentResult = (entertainment / totalExpenseSum) * 100;
+                tvEntertainment.setText(String.valueOf(df.format(finalEntertainmentResult)));
+
+                double finalUtilitiesResult = (utilities / totalExpenseSum) * 100;
+                tvUtilities.setText(String.valueOf(df.format(finalUtilitiesResult)));
+
+                double finalOthersResult = (others / totalExpenseSum) * 100;
+                tvOthers.setText(String.valueOf(df.format(finalOthersResult)));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

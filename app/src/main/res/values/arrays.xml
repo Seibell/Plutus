@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="types">
+        <item>Housing</item>
+        <item>Medical</item>
+        <item>Food</item>
+        <item>Entertainment</item>
+        <item>Utilities</item>
+        <item>Others</item>
+    </string-array>
+</resources>

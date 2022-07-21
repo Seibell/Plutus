@@ -59,11 +59,12 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Random"
-            android:id="@+id/profileFirstName"
+            android:inputType="textPersonName"
+            android:id="@+id/editProfileFirstName"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
@@ -101,11 +102,13 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User"
-            android:id="@+id/profileLastName"
+            android:maxLines="1"
+            android:inputType="textPersonName"
+            android:id="@+id/editProfileLastName"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
@@ -143,11 +146,98 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="random_user@gmail.com"
-            android:id="@+id/profileEmail"
+            android:inputType="textEmailAddress"
+            android:id="@+id/editProfileEmail"
+            android:layout_marginLeft="70dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/purple_200"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_lock"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Income"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="69"
+            android:id="@+id/editProfileIncome"
+            android:layout_marginLeft="70dp"
+            android:inputType="numberDecimal"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/purple_200"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_lock"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Savings Goal"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="69"
+            android:id="@+id/editProfileSavingsGoal"
+            android:inputType="numberDecimal"
             android:layout_marginLeft="70dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
@@ -155,14 +245,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnEditProfile"
+        android:id="@+id/btnSaveProfile"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/purple_500"
-        android:text="Edit Profile"
+        android:text="Save Profile"
         android:textSize="26dp"
         android:textStyle="bold"
         android:gravity="center_vertical|center_horizontal" />
