@@ -35,7 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import Model.Data;
 
@@ -146,18 +148,30 @@ public class ExpenseFragment extends Fragment {
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
 
             double sum = 0.00;
+            ArrayList<Data> recycleList = new ArrayList<>();
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                recycleList.clear();
+
                 DecimalFormat df = new DecimalFormat("0.00");
 
-                for (DataSnapshot s : snapshot.getChildren()) {
-                    Data data = s.getValue(Data.class);
-                    sum += data.getAmount();
+                if (snapshot.exists()) {
+                    for (DataSnapshot s : snapshot.getChildren()) {
+                        Data data = s.getValue(Data.class);
+                        recycleList.add(data);
+                        adapter.notifyDataSetChanged();
+                    }
 
-                    expenseSumResult.setText(df.format(sum));
+                    sum = 0.00;
+
+                    for (int i = 0; i < recycleList.size(); i++) {
+                        sum += recycleList.get(i).getAmount();
+                    }
                 }
+
+                expenseSumResult.setText(df.format(sum));
             }
 
             @Override
@@ -165,6 +179,8 @@ public class ExpenseFragment extends Fragment {
                 //nothing here?
             }
         });
+
+
 
         return view;
     }
@@ -191,7 +207,7 @@ public class ExpenseFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        pos_key = getRef(position).getKey();
+                        pos_key = getRef(holder.getAdapterPosition()).getKey();
 
                         amount = model.getAmount();
                         type = model.getType();

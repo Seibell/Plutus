@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     });
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                            Toast.makeText(RegisterActivity.this, "Please enter a longer password.",
                                     Toast.LENGTH_LONG).show();
                         }
                     }

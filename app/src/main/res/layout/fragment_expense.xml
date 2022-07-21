@@ -41,14 +41,14 @@
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:layout_height="wrap_content">
+
                 <TextView
+                    android:id="@+id/expense_txt_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/expense_txt_result"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/black"
                     android:text="000.00"
-                    />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
             </RelativeLayout>
 
         </LinearLayout>
