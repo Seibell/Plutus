@@ -37,7 +37,7 @@
 
     <EditText
         android:id="@+id/etLoginEmail"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:ems="10"
@@ -50,7 +50,7 @@
 
     <EditText
         android:id="@+id/etLoginPassword"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
@@ -63,7 +63,7 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="380dp"
+        android:layout_width="360dp"
         android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#D83E9B"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="50dp"/>
+        android:layout_marginLeft="60dp"/>
 
     <TextView
         android:id="@+id/tvSwitchToRegister"

@@ -37,7 +37,7 @@
 
     <EditText
         android:id="@+id/etFirstName"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
@@ -49,7 +49,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
     <EditText
         android:id="@+id/etLastName"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -62,7 +62,7 @@
 
     <EditText
         android:id="@+id/etRegisterEmail"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -75,7 +75,7 @@
 
     <EditText
         android:id="@+id/etIncome"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -88,7 +88,7 @@
 
     <EditText
         android:id="@+id/etSavingsGoal"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -101,7 +101,7 @@
 
     <EditText
         android:id="@+id/etRegisterPassword"
-        android:layout_width="380dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -114,7 +114,7 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="380dp"
+        android:layout_width="360dp"
         android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#D83E9B"
