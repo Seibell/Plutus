@@ -65,21 +65,37 @@ public class RegisterActivity extends AppCompatActivity {
         String firstName = etFirstName.getText().toString();
         String lastName = etLastName.getText().toString();
         String email = etRegisterEmail.getText().toString();
-        double income = Double.parseDouble(etIncome.getText().toString());
-        double savingsGoal = Double.parseDouble(etSavingsGoal.getText().toString());
         String password = etRegisterPassword.getText().toString();
+
+        double income = 0.0;
+        double savingsGoal = 0.0;
+
+        if (etIncome.getText().toString().matches("")) {
+            income = 0.0;
+        } else {
+            income = Double.parseDouble(etIncome.getText().toString());
+        }
+
+        if (etSavingsGoal.getText().toString().matches("")) {
+            savingsGoal = 0.0;
+        } else {
+            savingsGoal = Double.parseDouble(etSavingsGoal.getText().toString());
+        }
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
             return;
         }
 
+        double finalIncome = income;
+        double finalSavingsGoal = savingsGoal;
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            User user = new User(firstName, lastName, email, income, savingsGoal);
+                            User user = new User(firstName, lastName, email, finalIncome, finalSavingsGoal);
                             FirebaseDatabase.getInstance().getReference("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -89,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     });
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Please enter a longer password.",
+                            Toast.makeText(RegisterActivity.this, "Please try again.",
                                     Toast.LENGTH_LONG).show();
                         }
                     }

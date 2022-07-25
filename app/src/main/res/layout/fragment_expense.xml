@@ -60,7 +60,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_id_expense"
         android:layout_width="match_parent"
-        android:layout_height="404dp">
+        android:layout_height="391dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

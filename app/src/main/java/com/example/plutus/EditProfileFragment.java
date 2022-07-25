@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,8 @@ public class EditProfileFragment extends AppCompatActivity {
     EditText editProfileFirstName, editProfileLastName, editProfileEmail, editProfileIncome, editProfileSavingsGoal;
     Button btnSaveProfile;
 
+    TextView editProfileTop;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -47,6 +50,7 @@ public class EditProfileFragment extends AppCompatActivity {
         editProfileIncome = findViewById(R.id.editProfileIncome);
         editProfileSavingsGoal = findViewById(R.id.editProfileSavingsGoal);
 
+        editProfileTop = findViewById(R.id.editProfileTop);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,6 +65,7 @@ public class EditProfileFragment extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
 
                 if (user != null) {
+                    editProfileTop.setText(user.firstName + " " + user.lastName);
                     editProfileFirstName.setText(user.firstName);
                     editProfileLastName.setText(user.lastName);
                     editProfileEmail.setText(user.email);

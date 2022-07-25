@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Random User"
-            android:id="@+id/profileWelcome"
+            android:id="@+id/editProfileTop"
             android:textColor="@color/purple_500"
             android:textSize="20dp"
             android:layout_marginTop="8dp"
