@@ -66,4 +66,4 @@ Git (Version Control)
 
 
 # Project Link
-https://www.mediafire.com/file/t2vmlm1gi0ymrju/Plutus.apk/file
+https://www.mediafire.com/file/py8lr2rsy3r6egk/Plutus.apk/file
